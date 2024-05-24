@@ -157,11 +157,11 @@ def uniformCostSearch(problem: SearchProblem):
         if state not in explored:
             successors = problem.getSuccessors(state)
             for succeed in successors:
-                x = succeed[0]
-                if x not in explored:
+                map = succeed[0]
+                if map not in explored:
                     directions = succeed[1]
                     newCost = actions + [directions]
-                    frontier.push((x, actions + [directions]), problem.getCostOfActions(newCost))
+                    frontier.push((map, actions + [directions]), problem.getCostOfActions(newCost))
         explored.append(state)
     return actions
     util.raiseNotDefined()
