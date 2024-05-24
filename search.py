@@ -72,7 +72,7 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
-def depthFirstSearch(problem):
+def depthFirstSearch(problem: SearchProblem):
     """
     Search the deepest nodes in the search tree first.
 
@@ -87,6 +87,29 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
+    frontier = util.Stack()
+    explored = []
+    startState = problem.getStartState()
+    startNode = (startState, [])
+    frontier.push(startNode)
+
+    while not frontier.isEmpty():
+        state, actions = frontier.pop()
+
+        if state not in explored:
+            explored.append(state)
+
+            if problem.isGoalState(state):
+                return actions
+            else:
+                next = problem.getSuccessors(state)
+                for nextState, nextAction, cost in next:
+                    newAction = actions + [nextAction]
+                    newNode = (nextState, newAction)
+                    frontier.push(newNode)
+
+    return actions
+
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
